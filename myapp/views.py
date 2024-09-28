@@ -9,8 +9,7 @@ from .helping_utils import text_formatter
 # response = model.generate_content("Ask 5 question abt deep learning to test my knowledge so you can hekp me accordingly give ques seprated by - nothin else.")
 
 
-API_KEY = 'AIzaSyAFfbhyGQxnlFFzcsUIbiCdKZivHCudnyE'
-# API_KEY = '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'#distil-whisper-large-v3-en
+API_KEY = 'AIzaSyBkU-Hp9FzMSC7tD7AV74vTs-Q6869-pGg'
 genai.configure(api_key= API_KEY)
 
 model = genai.GenerativeModel("gemini-1.5-pro")
