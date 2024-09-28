@@ -1,4 +1,3 @@
-<!-- templates/myapp/home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +15,17 @@
       align-items: center;
       height: 100vh;
     }
-    
+
+    /* Add a fixed position for your name in the top-left corner */
+    .top-left-name {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 35px;
+      color: white;
+      font-weight: bold;
+    }
+
     .container {
       text-align: center;
       background: white;
@@ -96,6 +105,11 @@
 </head>
 <body>
 
+  <!-- Add your name at the top-left corner -->
+  <div class="top-left-name">
+    <a href="https://www.linkedin.com/in/rounak-gera-229a46287/">@Rounak Gera</a>
+  </div>
+
   <div class="container">
     <h1>Enter the topic name :</h1>
     
@@ -104,17 +118,6 @@
             {% csrf_token %}
             <input type="text" name="search" placeholder="Type your query here..." required>
             <br><br>
-
-            <!-- Dropdown for note category
-            <div class="dropdown">
-              <label for="category">Select Note Category:</label>
-              <select id="category" name="category" required>
-                  <option value="math">Math</option>
-                  <option value="science">Science</option>
-                  <option value="history">History</option>
-                  <option value="literature">Literature</option>
-              </select>
-            </div> -->
 
             <!-- File upload for PDF notes (optional) -->
             <div class="file-upload">

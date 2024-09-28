@@ -68,6 +68,16 @@
     .back-button:hover {
       background-color: #f50057;
     }
+    
+    /* Add a fixed position for your name in the top-left corner */
+    .top-left-name {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 35px;
+      color: white;
+      font-weight: bold;
+    }
 
     /* Home button in top-right corner */
     .home-button {
@@ -91,6 +101,10 @@
   </style>
 </head>
 <body>
+  <div class="top-left-name">
+    <a href="https://www.linkedin.com/in/rounak-gera-229a46287/">@Rounak Gera</a>
+  </div>
+
 
   <!-- Home button -->
   <a href="{% url 'home' %}" class="home-button">Home</a>
