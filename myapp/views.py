@@ -58,7 +58,7 @@ def response(request):
         }
         return render(request, 'response.html', context)
     else:
-        return render(request, 'home.html')
+        return render(request, 'home.html',{'popup':None})
 
 def home(request):
     if request.method == 'POST':
@@ -67,6 +67,14 @@ def home(request):
         beginner = request.POST.get('beginner')
         print(f"BEGIN : {beginner}")
         uploaded_file = request.FILES.get('file') # i have used get as file upload is optional
+
+        
+        if (not uploaded_file) and (not query):
+            context = {
+                'popup' : True
+            }
+            return render(request, 'home.html', context)
+
 
         if beginner:
             # complete beginner section
@@ -157,4 +165,4 @@ def home(request):
 
         return render(request, 'ques.html', context)
     else:
-        return render(request, 'home.html')
+        return render(request, 'home.html', {'popup':None})
