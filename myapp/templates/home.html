@@ -61,22 +61,8 @@
       outline: none;
     }
 
-    .search-box button {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      border: none;
-      background: #42a5f5;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .search-box button:hover {
-      background-color: #2196f3;
+    .file-upload {
+      margin-bottom: 20px;
     }
 
     .next-button {
@@ -93,14 +79,6 @@
     .next-button:hover {
       background-color: #f50057;
     }
-
-    .dropdown {
-      margin-bottom: 20px;
-    }
-
-    .file-upload {
-      margin-bottom: 20px;
-    }
   </style>
 </head>
 <body>
@@ -108,6 +86,7 @@
   <!-- Add your name at the top-left corner -->
   <div class="top-left-name">
     <a href="https://www.linkedin.com/in/rounak-gera-229a46287/">@Rounak Gera</a>
+    <a href="https://buildfastwithai.com/">Buildfastwithai</a>
   </div>
 
   <div class="container">
@@ -124,13 +103,17 @@
               <label for="file">Upload Your Notes (Optional, PDF only):</label>
               <input type="file" id="file" name="file" accept="application/pdf">
             </div>
-
-            <input type="checkbox" name="beginner" value="true">
-            <label for="beginner">Complete beginner</label>
-            
-            <button type="submit" class="next-button">&#128269; Submit</button>
-        </form>
     </div>
+
+    <!-- Checkbox for beginner option -->
+    <input type="checkbox" name="beginner" value="true">
+    <label for="beginner">Complete beginner</label>
+    <br><br>
+
+    <!-- Submit button moved here -->
+    <button type="submit" class="next-button">&#128269; Submit</button>
+
+    </form>
   </div>
 
 </body>
