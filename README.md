@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/f826df62-5581-4122-b622-b1cf80ff67ee)# LearnallAI : A step toward Customised AI
+# LearnallAI : A step toward Customised AI
 
 This is my submission for @buildfastwithai[https://buildfastwithai.com/] hackathon
 
