@@ -58,10 +58,13 @@ def test(request):
 
 def roadmap(request):
     if request.method == 'POST':
-        roadmap_text = request.POST.get('roadmap_text')
-        print(roadmap_text)
+        querry = request.POST.get('roadmap_text')
+        roadmap_response = model.generate_content(f"only generate in html , this is the response you gave to me for learning : {querry}, also generate a roadmap for me and use html tags in your response so i can show the results on my html page")
+        roadmap_text = roadmap_response.text
+        # print(roadmap_text)
+
         roadmap_lst = text_formatter(roadmap_text)
-        print(roadmap_lst)
+        # print(roadmap_lst)
 
         return render(request, 'roadmap.html', {'roadmap' : [''.join(roadmap_lst)]})
     else:
@@ -96,10 +99,7 @@ def response(request):
             response = model.generate_content([f"I will provide you with a set of questions, their corresponding answers, and a PDF document related to the topic. Your task is to understand the students knowledge based on their answers, then explain the content of the PDF in a way the student can understand, Questions: {questions} Answers: {answers} respond using html tags so i can display your output on my html page", sample_pdf])
         else:
             # response = model.generate_content(f"These are the questions i asked user : {questions} and these are answers givenby user: {answers} now judge the knowledge of user and accordingly explain about {query} this response will be given to user so write accordingly")
-            response = model.generate_content(f"You are a teacher and These are the questions you asked your student to test their knowledge so you can accordingly explain them about {query} : {questions} and these are answers given by student: {answers} now according to knowledge of your student explain about {query} respond using html tags so i can display your output on my html page")
-
-        roadmap_response = model.generate_content(f"this is the response you gave to me for learning : {response.text}, also generate a roadmap for me and use html tags in your response so i can show the results on my html page")
-        print(f"ROADMAP : {roadmap_response.text}")
+            response = model.generate_content(f"only generate html, You are a teacher and These are the questions you asked your student to test their knowledge so you can accordingly explain them about {query} : {questions} and these are answers given by student: {answers} now according to knowledge of your student explain about {query} respond using html tags so i can display your output on my html page")
         
         txt = response.text
         # print(txt)
@@ -110,7 +110,7 @@ def response(request):
         context = {
             'query': query,
             'results': [' '.join(lst)],  # Dummy results for now
-            'roadmap_text' : roadmap_response.text
+            'roadmap_text' : txt
         }
         return render(request, 'response.html', context)
     else:
@@ -155,15 +155,15 @@ def home(request):
             else:
                 response = model.generate_content(f"You are a teacher and  your student is a complete beginner and dont know about {query} now accordingly explain about {query} to your student respond using html tags so i can display your output on my html page")
             
-            roadmap_response = model.generate_content(f"this is the response you gave to me for learning : {response.text}, also generate a roadmap for me and use html tags in your response so i can show the results on my html page")
-            print(f"ROADMAP : {roadmap_response.text}")
+            # roadmap_response = model.generate_content(f"this is the response you gave to me for learning : {response.text}, also generate a roadmap for me and use html tags in your response so i can show the results on my html page")
+            # print(f"ROADMAP : {roadmap_response.text}")
 
             lst = text_formatter(response.text) 
 
             context = {
                 'query': query,
                 'results': [' '.join(lst)],  # Dummy results for now
-                'roadmap_text' : roadmap_response.text,
+                'roadmap_text' : response.text,
             }
             
             return render(request, 'response.html', context)
