@@ -9,10 +9,52 @@ from .helping_utils import text_formatter
 # response = model.generate_content("Ask 5 question abt deep learning to test my knowledge so you can hekp me accordingly give ques seprated by - nothin else.")
 
 
-API_KEY = 'AIzaSyBkU-Hp9FzMSC7tD7AV74vTs-Q6869-pGg'
+API_KEY = 'AIzaSyAFfbhyGQxnlFFzcsUIbiCdKZivHCudnyE'
 genai.configure(api_key= API_KEY)
 
 model = genai.GenerativeModel("gemini-1.5-pro")
+
+def test(request):
+    if request.method == 'POST':
+        query = request.POST.get('search')  # Get the search term from the HTML form
+        uploaded_file = request.FILES.get('file') # i have used get as file upload is optional
+
+        if (not uploaded_file) and (not query):
+            context = {
+                'popup' : True
+            }
+            return render(request, 'home.html', context)
+
+
+        # complete beginner section
+        if uploaded_file:
+            # Get the root directory of the project
+            root_directory = pathlib.Path(__file__).parents[1] # Root directory of your Django project
+
+            # Save the file in the root directory
+            filename = uploaded_file.name
+            file_path = os.path.join(root_directory, filename)
+
+            # Save file using FileSystemStorage
+            with open(file_path, 'wb+') as destination:
+                for chunk in uploaded_file.chunks():
+                    destination.write(chunk)
+
+            query = None
+
+            sample_pdf = genai.upload_file(file_path) #media / file_url)
+            response = model.generate_content(["read this pdf file  and generate a quiz of upto 7-9 mcqs display your output on my html page after each quiz question put a small button clicking which its answer should be shown", sample_pdf])
+
+        else:
+            response = model.generate_content(f"generate a quiz of upto 7-9 mcqs on topic {query} respond using html tags so i can display your output on my html page after each quiz question put a small button clicking which its answer should be shown")
+
+        txt = response.text
+        lst = list(txt.rpartition('```'))
+        txt = lst[0]
+        return render(request, 'quiz.html', {'results':[txt]})
+            
+    else:
+        return render(request,'test.html')
 
 def roadmap(request):
     if request.method == 'POST':

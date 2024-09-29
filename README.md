@@ -1,9 +1,14 @@
 # LearnallAI : A step toward Customised AI
 
 This is my submission for @buildfastwithai[https://buildfastwithai.com/] hackathon
+Provides:-
+- Customised explanation
+- Roadmap for future growth
+- Quiz to test level of knowledge
 
 ## Description
 A app to help students learn new concepts according to their level of understanding and also to help student understand notes with the help of AI according to their level of understanding and comprehension.
+- Educhain for Quiz generation
 - Django for website making
 - Gemini API for integration with AI
 - Render for deploying

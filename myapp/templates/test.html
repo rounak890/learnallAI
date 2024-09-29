@@ -85,6 +85,25 @@
       font-size: 16px;
       transition: background-color 0.3s ease;
     }
+    /* Home button in top-right corner */
+    .home-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .home-button:hover {
+      background-color: #388e3c;
+    }
 
     .next-button:hover {
       background-color: #f50057;
@@ -107,17 +126,16 @@
     <a href="https://buildfastwithai.com/">Buildfastwithai</a>
   </div>
 
-  <div class="top-right-name">
-    <a href="{% url 'test' %}">Test Your Knowledge</a>
-  </div>
+  <a href="{% url 'home' %}" class="home-button">Home</a>
+
 
   <div class="container">
-    <h1>Enter the topic name :</h1>
+    <h1>Enter the topic name  to test knowledge:</h1>
     
     <div class="search-box">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="text" name="search" placeholder="Type your query here..." >
+            <input type="text" name="search" placeholder="Type your tpoic here..." >
             <br><br>
 
             <!-- File upload for PDF notes (optional) -->
@@ -127,10 +145,7 @@
             </div>
     </div>
 
-    <!-- Checkbox for beginner option -->
-    <input type="checkbox" name="beginner" value="true">
-    <label for="beginner">Complete beginner</label>
-    <br><br>
+    <br>
 
     <!-- Submit button moved here -->
     <button type="submit" class="next-button">&#128269; Submit</button>
