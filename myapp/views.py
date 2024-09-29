@@ -14,6 +14,17 @@ genai.configure(api_key= API_KEY)
 
 model = genai.GenerativeModel("gemini-1.5-pro")
 
+def roadmap(request):
+    if request.method == 'POST':
+        roadmap_text = request.POST.get('roadmap_text')
+        print(roadmap_text)
+        roadmap_lst = text_formatter(roadmap_text)
+        print(roadmap_lst)
+
+        return render(request, 'roadmap.html', {'roadmap' : [''.join(roadmap_lst)]})
+    else:
+        return render(request, 'home.html',{'popup':None})
+    
 # Create your views here.
 def response(request):
     if request.method == 'POST':
@@ -45,6 +56,8 @@ def response(request):
             # response = model.generate_content(f"These are the questions i asked user : {questions} and these are answers givenby user: {answers} now judge the knowledge of user and accordingly explain about {query} this response will be given to user so write accordingly")
             response = model.generate_content(f"You are a teacher and These are the questions you asked your student to test their knowledge so you can accordingly explain them about {query} : {questions} and these are answers given by student: {answers} now according to knowledge of your student explain about {query} respond using html tags so i can display your output on my html page")
 
+        roadmap_response = model.generate_content(f"this is the response you gave to me for learning : {response.text}, also generate a roadmap for me and use html tags in your response so i can show the results on my html page")
+        print(f"ROADMAP : {roadmap_response.text}")
         txt = response.text
         # print(txt)
         lst = text_formatter(txt)
@@ -54,6 +67,7 @@ def response(request):
         context = {
             'query': query,
             'results': [' '.join(lst)],  # Dummy results for now
+            'roadmap_text' : roadmap_response.text
         }
         return render(request, 'response.html', context)
     else:
@@ -98,11 +112,15 @@ def home(request):
             else:
                 response = model.generate_content(f"You are a teacher and  your student is a complete beginner and dont know about {query} now accordingly explain about {query} to your student respond using html tags so i can display your output on my html page")
             
+            roadmap_response = model.generate_content(f"this is the response you gave to me for learning : {response.text}, also generate a roadmap for me and use html tags in your response so i can show the results on my html page")
+            print(f"ROADMAP : {roadmap_response.text}")
+
             lst = text_formatter(response.text) 
 
             context = {
                 'query': query,
                 'results': [' '.join(lst)],  # Dummy results for now
+                'roadmap_text' : roadmap_response.text,
             }
             
             return render(request, 'response.html', context)

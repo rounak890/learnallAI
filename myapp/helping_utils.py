@@ -1,6 +1,6 @@
 
 def text_formatter(txt):
-    txt = txt.replace('\n', '<br>')
+    # txt = txt.replace('\n', '<br>')
     temp =txt
     new = ''
     rep = '<h2>'
