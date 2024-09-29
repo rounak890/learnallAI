@@ -9,7 +9,7 @@ from .helping_utils import text_formatter
 # response = model.generate_content("Ask 5 question abt deep learning to test my knowledge so you can hekp me accordingly give ques seprated by - nothin else.")
 
 
-API_KEY = 'AIzaSyAFfbhyGQxnlFFzcsUIbiCdKZivHCudnyE'
+API_KEY = 'AIzaSyDhfavnFBGdFw_p-GEsEmYYMZbovlV1WH4'
 genai.configure(api_key= API_KEY)
 
 model = genai.GenerativeModel("gemini-1.5-pro")
@@ -100,6 +100,7 @@ def response(request):
 
         roadmap_response = model.generate_content(f"this is the response you gave to me for learning : {response.text}, also generate a roadmap for me and use html tags in your response so i can show the results on my html page")
         print(f"ROADMAP : {roadmap_response.text}")
+        
         txt = response.text
         # print(txt)
         lst = text_formatter(txt)
