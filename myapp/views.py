@@ -12,7 +12,7 @@ from .helping_utils import text_formatter
 API_KEY = 'AIzaSyDhfavnFBGdFw_p-GEsEmYYMZbovlV1WH4'
 genai.configure(api_key= API_KEY)
 
-model = genai.GenerativeModel("gemini-1.5-pro")
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 def test(request):
     if request.method == 'POST':
@@ -43,14 +43,14 @@ def test(request):
             query = None
 
             sample_pdf = genai.upload_file(file_path) #media / file_url)
-            response = model.generate_content(["read this pdf file  and generate a quiz of upto 7-9 mcqs display your output on my html page after each quiz question put a small button clicking which its answer should be shown", sample_pdf])
+            response = model.generate_content(["read this pdf file  and generate a quiz of upto 7-9 mcqs display your output on my html page at the end also give all answersno explaination", sample_pdf])
 
         else:
-            response = model.generate_content(f"generate a quiz of upto 7-9 mcqs on topic {query} respond using html tags so i can display your output on my html page after each quiz question put a small button clicking which its answer should be shown")
+            response = model.generate_content(f"generate a quiz of upto 7-9 mcqs on topic {query} respond using html tags so i can display your output on my html page at the end also give all answers no explaination")
 
         txt = response.text
-        lst = list(txt.rpartition('```'))
-        txt = lst[0]
+        # lst = list(txt.rpartition('```'))
+        # txt = lst[0]
         return render(request, 'quiz.html', {'results':[txt]})
             
     else:
